@@ -21,6 +21,8 @@ Do you have questions, ideas, feedback or just want to chat about integration? P
 
 You may run the framework or single services on a platform of your choice. As a refrence and to make it easier for you to get started we created two guides for you.
 
+[Local Setup](./notes.md) From notes (recommended for MACOS)
+
 [Local Setup](https://openintegrationhub.github.io/docs/3%20-%20GettingStarted/LocalInstallationGuide.html) with minikube or docker-compose.
 
 [Google Cloud Platform Setup](https://openintegrationhub.github.io/docs/3%20-%20GettingStarted/GCPInstallationGuide.html)

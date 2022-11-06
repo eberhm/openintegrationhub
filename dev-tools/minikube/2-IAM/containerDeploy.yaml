@@ -85,5 +85,12 @@ spec:
             path: /healthcheck
           initialDelaySeconds: 10
           timeoutSeconds: 1
+        volumeMounts:
+            - name: code
+              mountPath: /usr/src/app
+      volumes:
+      - name: code
+        persistentVolumeClaim:
+          claimName: source-volume-claim
   minReadySeconds: 10
   revisionHistoryLimit: 2

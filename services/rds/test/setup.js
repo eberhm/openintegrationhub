@@ -32,7 +32,7 @@ module.exports = async () => {
 
   const uri = `${replSet.getUri(dbName)}&retryWrites=true&w=majority`
 
-  // Set reference to mongod in order to close the server during teardown.
+  // Set reference to mongosh in order to close the server during teardown.
   global.__MONGOD__ = replSet
   process.env.MONGO_URL = uri
 

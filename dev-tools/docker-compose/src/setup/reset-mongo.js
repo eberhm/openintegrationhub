@@ -2,7 +2,7 @@ const { execSync } = require('child_process')
 const { dbRoot, services } = require('../config')
 const { checkTools, waitForMongo } = require('../helper')
 
-checkTools(['mongo'])
+checkTools(['mongod'])
 
 process.stdin.resume() // so the program will not close instantly
 
@@ -35,7 +35,7 @@ async function run() {
   for (const service of Object.values(services)) {
     if (!service.db) continue
 
-    execSync(`mongo ${service.db} --eval "db.dropDatabase();"`, {
+    execSync(`mongosh ${service.db} --eval "db.dropDatabase();"`, {
       stdio: 'inherit',
     })
   }

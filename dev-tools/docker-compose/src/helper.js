@@ -117,7 +117,7 @@ module.exports = {
 
     for (const service of services_) {
       // start service
-      execSync(`mongo ${service.db} --eval "db.dropDatabase()"`, {
+      execSync(`mongosh ${service.db} --eval "db.dropDatabase()"`, {
         stdio: 'inherit',
       })
 
@@ -167,7 +167,7 @@ module.exports = {
     console.log('Waiting for MongoDB')
     while (true) {
       try {
-        execSync('mongo --eval "db.getCollectionNames()"')
+        execSync('mongosh --eval "db.getCollectionNames()"')
       } catch (err) {
         continue
       }

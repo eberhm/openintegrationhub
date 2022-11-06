@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: source-volume
+spec:
+  accessModes:
+    # - ReadWriteOnce
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /Users/eber.herrera/workspace/github/openintegrationhub/openintegrationhub

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: iam
-          image: node:16-alpine #openintegrationhub/iam:latest #
+          image: node:16-alpine #openintegrationhub/iam:latest
           command: ["/bin/sh"]
           args: ["-c", "npm run start:container -w services/iam"]
           workingDir: /usr/src/app/
