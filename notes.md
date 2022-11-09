@@ -39,3 +39,122 @@ Users and Passwords are in openintegrationhub/dev-tools/minikube/setup-dockerDes
 https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop
 https://www.michaelrose.dev/posts/k8s-ingress-docker-desktop/
   - You do not need to do this part as it is already in customized script
+
+
+* All these errors seemed to be due to lack of resources (validate) *
+
+- Some resources adjustement
+  - ils was failing because OOM it was needed to increase the memory together other services
+  - if some services is failing try to changed the memory limits and apply using
+   ```kubectl apply -f <path>```
+
+- snapshot services was failing: 
+  ```> snapshots-service@0.4.3 start:container
+  > ts-node-dev ./src/app.ts | bunyan
+
+  sh: ts-node-dev: not found
+  sh: bunyan: not found
+  npm ERR! Lifecycle script `start:container` failed with error:
+  npm ERR! Error: command failed
+  npm ERR!   in workspace: snapshots-service@0.4.3
+  npm ERR!   at location: /usr/src/app/services/snapshots-service
+  npm notice
+  npm notice New patch version of npm available! 8.19.2 -> 8.19.3
+  npm notice Changelog: <https://github.com/npm/cli/releases/tag/v8.19.3>
+  npm notice Run `npm install -g npm@8.19.3` to update!
+  npm notice ```
+
+-  Go to ./services/snapshots-service and execute
+  ```VERSION=latest npm run build:docker  ```
+  and 
+  
+```kubectl apply -f /Users/beatriz.martin/Documents/Hack/openintegrationhub/dev-tools/minikube/4-Services/snapshots-service/service.yaml```
+
+* UNTIL HERE *
+
+
+# Flows
+
+You need to create a component
+Then with the component you create a flow.
+Everytime that in a step you emit some data, this will be passed as parameter in the next step: See https://github.com/bmjuan/oih-dummy-test for examples
+
+
+ {
+  url: "http://testURL.com",
+  token: "dsjhbsjdkbdksj"
+}
+{
+  name: 'Onlyfy Rest test',
+  description: 'Testing Onlyfy REST API',
+  graph: {
+    nodes: [
+      {
+        id: 'step_1',
+        componentId: '636a84f87a3217786945f809',
+        function: 'httpRequestTrigger',
+        name: 'Call REST Endpoint',
+        description: 'Call REST Endpoint',
+        fields: {
+          reader: {
+            url: '\'https://api.prescreenapp.io/v1/job\'',
+            method: 'GET',
+            headers: [
+              {
+                key: 'Content-Type',
+                value: '\'application/json\''
+              }
+            ]
+          },
+          auth: {
+            type: 'API Key Auth',
+            apiKey: {
+              headerName: 'apikey',
+              headerValue: 'krN3OL4YzOptP2OIvMejfOe2ruKfUS3t'
+            }
+          }
+        }
+      },
+      {
+        id: 'step_2',
+        componentId: '636a7d757a3217786945f7f3',
+        function: 'upsertObject',
+        name: 'Step2 upsertObject',
+        description: 'upsertObject call'
+      }
+    ],
+    edges: [
+      {
+        source: 'step_1',
+        target: 'step_2'
+      }
+    ]
+  },
+  type: 'ordinary',
+  owners: [
+    {
+      id: '636a7b0c3dfe20b731f37e99',
+      type: 'user'
+    }
+  ],
+  cron: '',
+  id: '636b6676136d7eb5afd1da0d'
+}
+
+
+
+
+
+curl 'http://skm.example.com/api/v1/auth-clients/' \
+  -H 'Accept: application/json, text/plain, */*' \
+  -H 'Accept-Language: en,es;q=0.9,de-DE;q=0.8,de;q=0.7' \
+  -H 'Authorization: Bearer Nvpfdy_Qe-DEbRCtTUJZw0QPGD49FGnFBhY7DjAPfMpEVEXrlohE8oc6mtAs0WEnQ5OpKMSh1qxMa1Yftey1guF7Neyi4GSC70GiLPu3YFaDFdrZC7yMhyc4NFYaYTTKopr4kUK8_5zROat6HlBRKcUPMbCm09Dy809jhhnQeQo' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  -H 'Origin: http://web-ui.example.com' \
+  -H 'Referer: http://web-ui.example.com/' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36' \
+  -H 'x-prescreen-env: dev' \
+  --data-raw '{"name":"MS Teams oAuth2", "type":"OA2_AUTHORIZATION_CODE", "redirectUri" : "http://localhost:31527/api/v1/callback", "predefinedScope" : "offline_access","endpoints" : {"auth" : "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?prompt=select_account&scope={{scope}}&response_mode=query&state={{state}}&redirect_uri={{redirectUri}}&response_type=code&client_id={{clientId}}","token" : "https://login.microsoftonline.com/common/oauth2/v2.0/token","userinfo" : "https://login.microsoftonline.com/common/openid/userinfo"},"clientId" : "02074f15-4b70-4a6f-bdf8-53d4a9dc6a68","clientSecret" : "hPh8Q~GafkebklOMHUx8iGQByGTChuSCYV.eYaJk","mappings" : {"externalId" : {"source" : "access_token","key" : "unique_name"},"scope" : {"key" : "scope"}}}' \
+  --compressed \
+  --insecure

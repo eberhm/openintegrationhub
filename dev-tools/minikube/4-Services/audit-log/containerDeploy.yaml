@@ -42,7 +42,7 @@ spec:
         resources:
           limits:
             cpu: "0.1"
-            memory: 1000Mi
+            memory: 800Mi
         livenessProbe:
           httpGet:
             port: 3007
