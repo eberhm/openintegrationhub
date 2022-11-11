@@ -145,16 +145,16 @@ Everytime that in a step you emit some data, this will be passed as parameter in
 
 
 
-curl 'http://skm.example.com/api/v1/auth-clients/' \
+
+
+
+  curl 'http://skm.example.com/api/v1/auth-clients' \
   -H 'Accept: application/json, text/plain, */*' \
   -H 'Accept-Language: en,es;q=0.9,de-DE;q=0.8,de;q=0.7' \
-  -H 'Authorization: Bearer Nvpfdy_Qe-DEbRCtTUJZw0QPGD49FGnFBhY7DjAPfMpEVEXrlohE8oc6mtAs0WEnQ5OpKMSh1qxMa1Yftey1guF7Neyi4GSC70GiLPu3YFaDFdrZC7yMhyc4NFYaYTTKopr4kUK8_5zROat6HlBRKcUPMbCm09Dy809jhhnQeQo' \
+  -H 'Authorization: Bearer YOUR_OIH_BEARER_TOKEN' \
   -H 'Connection: keep-alive' \
   -H 'Content-Type: application/json' \
-  -H 'Origin: http://web-ui.example.com' \
-  -H 'Referer: http://web-ui.example.com/' \
-  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36' \
-  -H 'x-prescreen-env: dev' \
-  --data-raw '{"name":"MS Teams oAuth2", "type":"OA2_AUTHORIZATION_CODE", "redirectUri" : "http://localhost:31527/api/v1/callback", "predefinedScope" : "offline_access","endpoints" : {"auth" : "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?prompt=select_account&scope={{scope}}&response_mode=query&state={{state}}&redirect_uri={{redirectUri}}&response_type=code&client_id={{clientId}}","token" : "https://login.microsoftonline.com/common/oauth2/v2.0/token","userinfo" : "https://login.microsoftonline.com/common/openid/userinfo"},"clientId" : "02074f15-4b70-4a6f-bdf8-53d4a9dc6a68","clientSecret" : "hPh8Q~GafkebklOMHUx8iGQByGTChuSCYV.eYaJk","mappings" : {"externalId" : {"source" : "access_token","key" : "unique_name"},"scope" : {"key" : "scope"}}}' \
+  --data-raw '{"name":"MS Teams oAuth2", "type":"OA2_AUTHORIZATION_CODE", "redirectUri" : "http://localhost:31415/api/v1/callback", "predefinedScope" : "offline_access","endpoints" : {"auth" : "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?prompt=select_account&scope={{scope}}&response_mode=query&state={{state}}&redirect_uri={{redirectUri}}&response_type=code&client_id={{clientId}}","token" : "https://login.microsoftonline.com/common/oauth2/v2.0/token","userinfo" : "https://login.microsoftonline.com/common/openid/userinfo"},"clientId" : "YOUR_MS_APP_ID","clientSecret" : "YOUR_CRED_SECRET","mappings" : {"externalId" : {"source" : "access_token","key" : "unique_name"},"scope" : {"key" : "scope"}}}' \
   --compressed \
   --insecure
+
