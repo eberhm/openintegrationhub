@@ -41,7 +41,7 @@ spec:
           value: "logs"
         resources:
           limits:
-            cpu: "0.1"
+            cpu: "0.2"
             memory: 800Mi
         livenessProbe:
           httpGet:

@@ -40,9 +40,6 @@ https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop
 https://www.michaelrose.dev/posts/k8s-ingress-docker-desktop/
   - You do not need to do this part as it is already in customized script
 
-
-* All these errors seemed to be due to lack of resources (validate) *
-
 - Some resources adjustement
   - ils was failing because OOM it was needed to increase the memory together other services
   - if some services is failing try to changed the memory limits and apply using
@@ -67,7 +64,7 @@ https://www.michaelrose.dev/posts/k8s-ingress-docker-desktop/
 -  Go to ./services/snapshots-service and execute
   ```VERSION=latest npm run build:docker  ```
   and 
-  
+
 ```kubectl apply -f /Users/beatriz.martin/Documents/Hack/openintegrationhub/dev-tools/minikube/4-Services/snapshots-service/service.yaml```
 
 * UNTIL HERE *
